@@ -23,7 +23,7 @@ app.get('/user', (req, res) => {
 })
 
 let ages;
-app.post('/user', (req, res) => {
+app.post('/user/check', (req, res) => {
   if(req.body.age === 17) 
   {ages = '1학년'}
   else if(req.body.age === 18)
@@ -32,13 +32,16 @@ app.post('/user', (req, res) => {
   {ages = '3학년'}
   else{ages = '고등학생이 아닌'}
   res.send({msg: `${ages} ${req.body.name}님 반갑습니다`})
+  console.log({msg: `${ages} ${req.body.name}님 반갑습니다`})
 })
 
 app.post('/user/login', (req,res) =>{
   if(req.body.id == ID.id && req.body.password == ID.password){
+    console.log(`${req.body.id} 님 반갑습니다`)
     res.send(`${req.body.id} 님 반갑습니다`)
   }
   else {
+    console.log('msg: id or password false')
     res.send('msg: id or password false')
   }
 })

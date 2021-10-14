@@ -19,7 +19,7 @@ app.get('/users', (req,res) => {
   connection.query('SELECT * from select_test', (error,rows) => {
   if(error) throw error;
   console.log('User info is: ', rows);
-  res.send(rows[0]);
+  res.send(rows);
   });
 });
 
@@ -35,5 +35,12 @@ app.get('/song', (req,res) => {
     res.send(rows);
   });
 });
+
+app.get('/login', (req,res) => {
+  connection.query('SELECT * from person', (error,rows) => {
+    if(error) throw error;
+    res.send(rows);
+  })
+})
 
 app.listen(4000);

@@ -12,7 +12,7 @@ app.get('/users', (req,res) => {
   connection.query('SELECT * from select_test', (error,rows) => {
   if(error) throw error;
   console.log('User info is: ', rows);
-  res.send(rows);
+  res.send(rows[0]);
   });
 });
 

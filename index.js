@@ -1,49 +1,27 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const app = express()
-app.use(bodyParser.json())
+const express = require('express');
+const mysql = require('mysql');
+const dbconfig = require('./database.js')
+const connection = mysql.createConnection(dbconfig);
+const app = express();
 
-const item = [{
-  id: 1,
-  name: "홍길동",
-  height: 175.6
-}];
+app.get('/', (req,res) => {
+  res.send('Root');
+});
 
-const ID = {
-  id:'moon',
-  password: '0319'
-};
+app.get('/users', (req,res) => {
+  connection.query('SELECT * from select_test', (error,rows) => {
+  if(error) throw error;
+  console.log('User info is: ', rows);
+  res.send(rows);
+  });
+});
 
-app.get('/', (req,res) =>{
-  console.log("Hello")
-  res.send("/user/check == 고등학생 판별 \n/user/login == 로그인 \n/user == 유저정보")
-})
-app.get('/user', (req, res) => {
-  res.send(item[0])
-})
-
-let ages;
-app.post('/user/check', (req, res) => {
-  if(req.body.age === 17) 
-  {ages = '1학년'}
-  else if(req.body.age === 18)
-  {ages = '2학년'}
-  else if(req.body.age === 19)
-  {ages = '3학년'}
-  else{ages = '고등학생이 아닌'}
-  res.send({msg: `${ages} ${req.body.name}님 반갑습니다`})
-  console.log({msg: `${ages} ${req.body.name}님 반갑습니다`})
+app.get('/song', (req,res) => {
+  connection.query('SELECT * from song', (error,rows) => {
+    if(error) throw error;
+    console.log('song name:', rows);
+    res.send(rows);
+  })
 })
 
-app.post('/user/login', (req,res) =>{
-  if(req.body.id == ID.id && req.body.password == ID.password){ 
-    console.log(`${req.body.nickname} 님 반갑습니다`)
-    res.send(`${req.body.nickname} 님 반갑습니다`)
-  }
-  else {
-    console.log('msg: id or password false')
-    res.send('msg: id or password false')
-  }
-})
-
-app.listen(4000)
+app.listen(4000);

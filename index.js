@@ -1,7 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-
 app.use(bodyParser.json())
 
 const item = [{
@@ -16,7 +15,8 @@ const ID = {
 };
 
 app.get('/', (req,res) =>{
-  res.send("Hello")
+  console.log("Hello")
+  res.send("/user/check == 고등학생 판별 \n/user/login == 로그인 \n/user == 유저정보")
 })
 app.get('/user', (req, res) => {
   res.send(item[0])
@@ -36,9 +36,9 @@ app.post('/user/check', (req, res) => {
 })
 
 app.post('/user/login', (req,res) =>{
-  if(req.body.id == ID.id && req.body.password == ID.password){
-    console.log(`${req.body.id} 님 반갑습니다`)
-    res.send(`${req.body.id} 님 반갑습니다`)
+  if(req.body.id == ID.id && req.body.password == ID.password){ 
+    console.log(`${req.body.nickname} 님 반갑습니다`)
+    res.send(`${req.body.nickname} 님 반갑습니다`)
   }
   else {
     console.log('msg: id or password false')

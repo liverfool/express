@@ -6,13 +6,15 @@ req.cookie
 +)Session cookie / Permanent cookie
 1) Session cookie: 웹 브라우저를 종료하면 사라짐(쿠키 생성시 옵션값을 주지 않은 경우)
 2) Permanent cookie: 웹 브라우저를 종료해도 사라지지 않음(쿠키 생성시 설정한 날짜 혹은 기간 동안 유지)
++ Permanent cookie를 생성하기 위해서는 쿠키를 지속시킬 날짜 혹은 기간을 설정해야 한다.
+expire(날짜): 쿠키가 삭제될 날짜를 지정
+Max-Age(기간): 쿠키가 생성된 시점으로부터 지속될 기간을 설정
 
 3. cookie 옵션 설정하기
 res.cookie('cookie이름', 'cookie내용', {쿠키옵션})
 ex) res.cookie('myCookie','set cookie', {maxAge:3000});
 
 +)이외의 쿠키 옵션
-
 1) HttpOnly : 자바스크립트에서 접근하지 못하게 막아줌(document.cookie로 접근할 수 없도록)
 2) Path : 설정한 경로 안에서만 쿠키가 활성화 됨
 3) Domain : 서브 도메인을 포함시킬 수 있음
